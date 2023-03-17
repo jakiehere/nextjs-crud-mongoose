@@ -18,7 +18,6 @@ export default function Home() {
   const [title, setTitle] = useState<string>("");
   const [updateId, setUpdateId] = useState<string | undefined>();
   const [search, setSearch] = useState<string>("");
-  const [displayBtn, setDiplayBtn] = useState<string>("hidden");
 
   const url = search ? `/api/todo?todo=${search}` : "/api/todo";
 
