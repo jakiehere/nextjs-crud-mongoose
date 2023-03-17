@@ -101,8 +101,8 @@ export default function Home() {
           position="top-right"
           reverseOrder={false}
         />
-        <div className='max-w-5xl min-w-[90%] h-fit rounded-lg text-center bg-gray-500 p-5'>
-          <div className='mx-0 flex justify-between px-4 sm:px-8' >
+        <div className='max-w-5xl w-full h-fit rounded-lg text-center bg-gray-500 p-5'>
+          <div className='mx-0 flex justify-between px-4 ' >
             <form onSubmit={createTodo} className="w-[40%]">
               <input
                 type="text"
@@ -121,13 +121,13 @@ export default function Home() {
             />
           </div>
 
-          <div className="container mx-auto px-4 sm:px-8">
+          <div className="container mx-auto px-4">
             <div className="py-4">
               <div>
                 <h2 className="text-2xl font-semibold leading-tight text-white">Todo List</h2>
               </div>
 
-              <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
+              <div className="-mx-4 px-4 py-4 overflow-x-auto">
                 <div
                   className="inline-block min-w-full shadow-md rounded-lg overflow-hidden"
                 >
@@ -136,7 +136,7 @@ export default function Home() {
                       <thead>
                         <tr>
                           <th
-                            className="px-8 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
+                            className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider"
                           >
                             Name
                           </th>
@@ -155,7 +155,7 @@ export default function Home() {
                       <tbody>
                         {data?.map((val: any, index: number) => (
                           <tr key={index}>
-                            <td className={`px-8 py-5 border-b border-gray-200 bg-white text-sm flex group`}>
+                            <td className={`px-5 py-5 border-b border-gray-200 bg-white text-sm flex group`}>
                               <p className={`todo-title whitespace-no-wrap px-3 float-left ${val.isCompleted ? 'line-through text-gray-700' : 'text-gray-900'}`}>{val.todo}</p>
                               <div className='hidden group-hover:block'>
                                 <button
