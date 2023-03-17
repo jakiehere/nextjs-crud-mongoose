@@ -101,9 +101,7 @@ export default function Home() {
           position="top-right"
           reverseOrder={false}
         />
-        {isLoading && <p>Loading...</p>}
-
-        <div className='max-w-5xl h-fit rounded-lg text-center bg-gray-500 p-5'>
+        <div className='max-w-5xl min-w-[90%] h-fit rounded-lg text-center bg-gray-500 p-5'>
           <div className='mx-0 flex justify-between px-4 sm:px-8' >
             <form onSubmit={createTodo} className="w-[40%]">
               <input
