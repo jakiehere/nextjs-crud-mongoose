@@ -9,6 +9,7 @@ import { FaPenSquare, FaTrash } from "react-icons/fa";
 import useSWR from "swr";
 
 import style from "../styles/Home.module.css";
+import { Todolist } from "@/type";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,7 +26,7 @@ export default function Home() {
 
   const handleSearch = (value: string) => {
     setSearch(value);
-    mutate(`/api/todo?todo=${search}`);
+    mutate(url);
   };
 
   const createTodo = async (e: any) => {
@@ -41,14 +42,14 @@ export default function Home() {
         setUpdateId(undefined);
         if (req.status === 200) {
           toast.success(req.data.message);
-          mutate("/api/todo");
+          mutate(url);
         }
       } else {
         const req = await axios.post("/api/todo", { todo: title });
         setTitle("");
         if (req.status === 200) {
           toast.success(req.data.message);
-          mutate("/api/todo");
+          mutate(url);
         }
       }
     } catch (error: any) {
@@ -61,7 +62,7 @@ export default function Home() {
     setUpdateId(id);
   };
 
-  const markCompleted = async (id: string, isCompleted: boolean) => {
+  const markCompleted = async (id?: string, isCompleted?: boolean) => {
     try {
       const req = await axios.put(
         "/api/todo",
@@ -71,7 +72,7 @@ export default function Home() {
       if (req.status === 200) {
         toast.success(req.data.message);
         setTitle("");
-        mutate("/api/todo");
+        mutate(url);
       }
     } catch (error: any) {
       toast.error(error.response.data.error);
@@ -84,7 +85,7 @@ export default function Home() {
       if (req.status === 200) {
         toast.success(req.data.message);
         setTitle("");
-        mutate("/api/todo");
+        mutate(url);
       }
     } catch (error: any) {
       toast.error(error.response.data.error);
@@ -135,19 +136,19 @@ export default function Home() {
                     <table className="min-w-full leading-normal">
                       <thead>
                         <tr>
-                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">
                             Is Complete
                           </th>
-                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">
                             Name
                           </th>
-                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
+                          <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider text-center">
                             Date & Time
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        {data?.map((val: any, index: number) => (
+                        {data?.map((val: Todolist, index: number) => (
                           <tr key={index}>
                             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                               <input
