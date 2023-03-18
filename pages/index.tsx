@@ -11,6 +11,8 @@ import {
 } from 'react-icons/fa';
 import useSWR from 'swr';
 
+import { Todolist } from '@/types';
+
 import style from '../styles/Home.module.css';
 
 const inter = Inter({ subsets: ['latin'] })
@@ -61,7 +63,7 @@ export default function Home() {
     setUpdateId(id)
   }
 
-  const markCompleted = async (id: string, isCompleted: boolean) => {
+  const markCompleted = async (id?: string, isCompleted?: boolean) => {
     try {
       const req = await axios.put('/api/todo', { isCompleted: !isCompleted }, { params: { id } })
       if (req.status === 200) {
@@ -153,7 +155,7 @@ export default function Home() {
                         </tr>
                       </thead>
                       <tbody>
-                        {data?.map((val: any, index: number) => (
+                        {data?.map((val: Todolist, index: number) => (
                           <tr key={index}>
                             <td className={`px-5 py-5 border-b border-gray-200 bg-white text-sm flex group`}>
                               <p className={`todo-title whitespace-no-wrap px-3 float-left ${val.isCompleted ? 'line-through text-gray-700' : 'text-gray-900'}`}>{val.todo}</p>
