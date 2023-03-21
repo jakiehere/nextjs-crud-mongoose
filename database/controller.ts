@@ -1,19 +1,22 @@
 /** Controller */
-import type { NextApiRequest, NextApiResponse } from "next";
+import type {
+  NextApiRequest,
+  NextApiResponse,
+} from 'next';
 
-import Todos from "../models/Todos";
+import Todos from '../models/Todos';
 
 export async function getTodos(req: NextApiRequest, res: NextApiResponse) {
   const { todo } = req.query;
   try {
     if (todo) {
-      const todos = await Todos.find({ $text: { $search: `${todo}` } });
+      const todos = await Todos.find({ $text: { $search: `${todo}` } }).sort({updatedAt: -1});
       if (todos.length === 0) {
         return res.status(200).json("No result. Create a new one instead!");
       }
       res.status(200).json(todos);
     } else {
-      const todos = await Todos.find({});
+      const todos = await Todos.find({}).sort({updatedAt: -1});
       if (!todos) {
         return res.status(400).json({ error: "Data not found" });
       }
